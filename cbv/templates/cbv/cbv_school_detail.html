@@ -1,0 +1,45 @@
+{% extends 'cbv/cbv_base.html' %}
+
+{% block content %}
+    <h1>Welcome to the School Detail Page</h1>
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card blue lighten-4">
+                <div class="card-content">
+                    <span class="card-title">{{ school_detail.name }}</span>
+                    <p>Principal: {{ school_detail.principal }}</p>
+                    <p>Location: {{ school_detail.location }}</p>
+                    <br>
+                    <ul class="collection with-header card blue lighten-4">
+                        <li class="collection-header"><h4>Students:</h4></li>
+                        {% for student in school_detail.students.all %}
+                            <li class="collection-item">{{ student.name }} who is {{ student.age }} years old.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="card-action">
+                    <a href="{% url 'cbv:update' school_detail.id %}" class="waves-effect waves-light btn">Update
+                        School</a>
+                    <a href="{% url 'cbv:list' %}" class="waves-effect waves-light btn">Back to list</a>
+                    <!-- Modal Trigger -->
+                    <button data-target="modal1" class="btn modal-trigger red">Delete School</button>
+
+                    <!-- Modal Structure -->
+                    <div id="modal1" class="modal pink lighten-2" style="width: 500px">
+                        <div class="modal-content">
+                            <h4>Deleting - {{ school_detail.name }}</h4>
+                            <p>Are you sure you want to delete?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <form action="{% url 'cbv:delete' school_detail.id %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="modal-close btn waves-effect waves-light">Confirm Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

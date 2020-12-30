@@ -1,0 +1,16 @@
+{% extends 'cbv/cbv_base.html' %}
+
+{% block content %}
+    <h1>Welcome to list of all the Students.</h1>
+    <ol>
+        {% for student in students %}
+            <h3>
+                <li>{{ student.name }}</li>
+            </h3>
+            <ul>
+                <li><h6>Age: {{ student.age }}</h6></li>
+                <li><h6>School:<a href="{% url 'cbv:detail' student.school.id %}"> {{ student.school }}</a></h6></li>
+            </ul>
+        {% endfor %}
+    </ol>
+{% endblock %}

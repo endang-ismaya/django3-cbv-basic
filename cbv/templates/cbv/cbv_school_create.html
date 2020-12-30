@@ -1,0 +1,18 @@
+{% extends 'cbv/cbv_base.html' %}
+
+{% block content %}
+    <h1>
+        {% if not form.instance.pk %}
+            Create School
+        {% else %}
+            Update School
+        {% endif %}
+    </h1>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+        </button>
+    </form>
+{% endblock %}
